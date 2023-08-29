@@ -1,0 +1,46 @@
+.content-area-wrapper
+  .content-wrapper
+    .container-fluid
+      .row
+        .col-lg-7
+          .head_toggle_select
+            span
+
+            h1.head_title
+              | Message List
+        .container-fluid
+          .row.mb-3
+            .col-md-5
+              .icons-search-wrapper.mb-3
+            .col-md-7
+              .btn-wrapper.text-end
+                = link_to 'New Message', new_message_path, class: "btn btn-primary mb-3"
+          .row
+            .col-xl-12
+              .table-responsive.site-table-wrapper
+                table.table
+                  thead
+                    tr
+                      th[scope="col"]
+                        | ID
+                      th[scope="col"]
+                        | Body
+                      th[scope="col"]
+                        | Actions
+                      th[scope="col"]
+                        | Audits
+                  tbody
+                    - @messages.each do |message|
+                      tr
+                        td = message.id
+                        td = message.body
+                        td
+                          = link_to 'Show', message_path(message)
+                          = link_to 'Edit', edit_message_path(message)
+                          = button_to 'Destroy', message_path(message),  method: :delete, data: { confirm: 'Are you sure?' }
+                        td
+                          = link_to 'View Audit Changes',  audit_changes_admin_message_path(message)
+
+                    = will_paginate @messages
+
+                = link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger mt-3"

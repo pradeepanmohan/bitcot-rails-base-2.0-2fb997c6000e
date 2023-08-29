@@ -1,0 +1,68 @@
+.content-area-wrapper
+  .content-wrapper
+    .container-fluid
+      .row
+        .col-lg-12
+          .head_toggle_select
+            span
+
+            h1.head_title
+              | User List
+        .container-fluid
+          .row.mb-3
+            .col-md-5
+              .icons-search-wrapper.mb-3
+                = form_tag admin_users_path, method: :get do
+                  = text_field_tag :search, params[:search], placeholder: 'Search...'
+                  | &nbsp;&nbsp;&nbsp;
+                  = submit_tag 'Search', name: nil
+                  span.search-icon
+            .col-md-7
+              .btn-wrapper.text-end
+                = link_to 'New User', new_admin_user_path, class: "btn btn-primary mb-3"
+          .row
+            .col-xl-12
+              .table-responsive.site-table-wrapper
+                table.table
+                  thead
+                    tr
+                      /th[scope="col"]
+                      /  | Photo
+                      th[scope="col"]
+                        | First Name
+                      th[scope="col"]
+                        | Last Name
+                      th[scope="col"]
+                        | Email
+                      th[scope="col"]
+                        | Active Status
+                      th[scope="col",colspan="3"]
+                        | Actions
+                      th[scope="col",colspan="2"]
+                        | Impersonate Login
+                      th[scope="col",colspan="2"]
+                        | Audits
+                  tbody
+                    - @users.each do |user|
+                      tr
+                        td
+                          - if user.photo_path.present?
+                            = image_tag user.photo_path.url, :class => "user_list_photo"
+                          - else
+                            = image_tag 'icon/img.jpg', :class => "user_list_photo"
+                          '
+                          = link_to "#{user.first_name}", admin_user_path(user)
+                        td = user.last_name
+                        td = user.email
+                        td = user.active_status
+                        div.flex-column
+                          td[style="display: flex" ]
+                            = link_to image_tag('icon/icn-edit.jpg', class: 'small-icon icon-spacing'), edit_admin_user_path(user), class: 'inline-action'
+                            = button_to image_tag('icon/icn-trash.jpg', class: 'small-icon'), soft_delete_admin_user_path(user), method: :patch, data: { confirm: 'Are you sure?' },class: 'icon-button inline-action'
+
+                        td
+                          = button_to "Login as #{user.first_name}", impersonate_admin_user_path(user), method: :post, class: 'btn btn-secondary btn-md btn-primary'
+                        td
+                          = link_to 'View Audit Changes',  audit_changes_admin_user_path(user)
+                = paginate @users
+                = link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger mt-3"

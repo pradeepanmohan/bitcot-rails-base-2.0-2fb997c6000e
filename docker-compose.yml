@@ -1,0 +1,28 @@
+version: '3'
+services:
+  # redis:
+  #   image: redis:latest
+  #   ports:
+  #     - "6379:6379"
+  rails_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/rails_app
+    expose:
+      - "3000"
+    environment:
+      RAILS_ENV: development
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - .:/var/www/rails_app
+    ports:
+      - "80:80"
+    depends_on:
+      - rails_app
+      # - redis

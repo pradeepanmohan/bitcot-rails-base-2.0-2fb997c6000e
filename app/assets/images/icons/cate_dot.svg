@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="Group_43806" data-name="Group 43806" transform="translate(14398 19667)">
+    <rect id="Rectangle_14270" data-name="Rectangle 14270" width="30" height="30" transform="translate(-14398 -19667)" fill="none"/>
+    <g id="dots" transform="translate(-14399.214 -19669)">
+      <path id="XMLID_294_" d="M13,16.214A3.214,3.214,0,1,0,16.214,13,3.218,3.218,0,0,0,13,16.214Z" transform="translate(0 0.714)" fill="#858585"/>
+      <path id="XMLID_295_" d="M13,26.214A3.214,3.214,0,1,0,16.214,23,3.218,3.218,0,0,0,13,26.214Z" transform="translate(0 1.427)" fill="#858585"/>
+      <path id="XMLID_297_" d="M13,6.214A3.214,3.214,0,1,0,16.214,3,3.218,3.218,0,0,0,13,6.214Z" fill="#858585"/>
+    </g>
+  </g>
+</svg>

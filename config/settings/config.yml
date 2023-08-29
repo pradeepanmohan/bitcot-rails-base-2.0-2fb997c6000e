@@ -1,0 +1,26 @@
+development:
+  ios_version: '1.0'
+  android_version: '1.0'
+  web_version: '1.0'
+  web_url: 'http://localhost:3000'
+  access_token_validity: 604800
+  refresh_token_validity: 864000
+  redis_url: 'redis://localhost:6379'
+
+test:
+  ios_version: '1.0'
+  android_version: '1.0'
+  web_version: '1.0'
+  web_url: 'http://localhost:3000'
+  access_token_validity: 604800
+  refresh_token_validity: 864000
+  redis_url: 'redis://localhost:6379'
+
+staging:
+  ios_version: '1.0'
+  android_version: '1.0'
+  web_version: '1.0'
+  web_url: 'http://localhost:3000'
+  access_token_validity: 604800
+  refresh_token_validity: 864000
+  redis_url: 'redis://localhost:6379'

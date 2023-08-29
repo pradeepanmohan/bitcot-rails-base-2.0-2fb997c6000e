@@ -1,0 +1,2 @@
+json.created_at formatted_api_datetime(object.created_at)
+json.updated_at formatted_api_datetime(object.updated_at)

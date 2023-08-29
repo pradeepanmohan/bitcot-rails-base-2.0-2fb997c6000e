@@ -1,0 +1,16 @@
+.content-wrapper
+  .auth-warpper
+    .auth-title.text-center
+    .form-group.field.row
+      .col-sm-5.col-sm-offset-3
+      h2
+        | Resend confirmation instructions
+      = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .site-form-group.mb-3
+          br
+          = f.text_field :email, class: 'input-modify', placeholder: 'Email address'
+        .actions
+          = f.submit "Resend confirmation instructions",class: 'input-modify btn btn-secondary btn-md btn-primary'
+          br
+          = link_to "Log in", new_session_path(resource_name),class: 'btn btn-secondary btn-md btn-primary'

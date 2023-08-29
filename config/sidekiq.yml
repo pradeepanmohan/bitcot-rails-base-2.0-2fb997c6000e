@@ -1,0 +1,9 @@
+---
+:concurrency: 2
+staging:
+  :concurrency: 2
+production:
+  :concurrency: 5
+:queues:
+  - ["default", 1]
+  - ["mailers", 1]

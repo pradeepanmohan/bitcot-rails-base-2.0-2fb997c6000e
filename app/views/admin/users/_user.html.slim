@@ -1,0 +1,15 @@
+tr[id="#{dom_id(user)}" data-stream-enter-class="animate-item-in" data-stream-exit-class="animate-item-out"]
+  td
+    - if user.photo_path.present?
+      = image_tag user.photo_path.url, :class => "user_list_photo"
+    - else
+      = image_tag 'icon/img.jpg', :class => "user_list_photo"
+    = link_to "#{user.first_name}", admin_user_path(user)
+  td= user.last_name
+  td= user.email
+  td= user.active_status
+  td= link_to image_tag('icon/icn-edit.jpg', class: 'small-icon icon-spacing'), edit_admin_user_path(user), class: 'inline-action'
+  td= button_to image_tag('icon/icn-trash.jpg', class: 'small-icon'), admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'icon-button inline-action'
+  td= button_to "Login as #{user.first_name}", impersonate_admin_user_path(user), method: :post, class: 'btn btn-secondary btn-md btn-primary'
+  td
+    = link_to 'View Audit Changes',  audit_changes_admin_user_path(user)

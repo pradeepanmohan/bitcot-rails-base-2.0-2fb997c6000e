@@ -1,0 +1,5 @@
+- if results.any?
+  .absolute.w-full.overflow-y-auto.max-h-60.bg-white.rounded-lg.shadow-lg
+    - results.each do |post|
+      .p-2.border-b.border-gray-300.hover:bg-gray-100
+        = link_to post.title, admin_post_path(post), class: "text-blue-500"

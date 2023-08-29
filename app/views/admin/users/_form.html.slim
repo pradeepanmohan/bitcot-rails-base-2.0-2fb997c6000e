@@ -1,0 +1,40 @@
+.content-area-wrapper
+  .content-wrapper
+    .auth-warpper
+      .auth-title.text-center
+      = form_with(model: [:admin, user], local: true) do |f|
+        .onboarding-form
+          fieldset
+            .site-form-group.mb-3
+              = f.label :first_name, "First Name"
+              = f.text_field :first_name, class: 'input-modify', placeholder: 'First name'
+
+            .site-form-group.mb-3
+              = f.label :last_name, "Last Name"
+              = f.text_field :last_name, class: 'input-modify', placeholder: 'Last name'
+
+            .site-form-group.mb-3
+              = f.label :email, "Email"
+              = f.text_field :email, class: 'input-modify', placeholder: 'Email address'
+
+            .site-form-group.mb-3
+              = f.label :password, "Password"
+              i
+                | (leave blank if you don't want to change it)
+              = f.password_field :password, class: 'input-modify', placeholder: 'Enter your password'
+
+              - if @minimum_password_length
+                br
+                em
+                  = @minimum_password_length
+                  |  characters minimum
+            .site-form-group.mb-3
+              = f.label :password_confirmation, "Password Confirmation"
+              = f.password_field :password_confirmation, class: 'input-modify', placeholder: 'Confirm your password'
+
+            .site-form-group.mb-3
+              = f.label :image, "Image"
+              = f.file_field :image, class: 'input-modify'
+
+          .site-form-group.text-center
+            = f.submit "Submit", class: 'btn btn-secondary btn-md btn-primary'

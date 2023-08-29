@@ -1,0 +1,4 @@
+= turbo_stream.update "flash", partial: "shared/flash"
+= turbo_stream.append "posts-list", partial: "posts/post", locals: { contact: @post }
+= turbo_stream.update "posts-count", partial: "posts/count", locals: { contacts: @posts }
+= turbo_stream.update "post-form", partial: "posts/form", locals: { contact: Post.new }

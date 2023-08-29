@@ -1,0 +1,182 @@
+doctype html
+html
+  head
+    title
+      | Admin
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "graph1", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "graph2", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "graph3", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "graph4", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "graph5", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "bulletchart", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "chart.min", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "loader", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "user", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "left-sidebar", "data-turbo-track": "reload", defer: true
+
+    link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"]
+    link[href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet"]
+    script[type="text/javascript" src="https://www.gstatic.com/charts/loader.js"]
+    script[src="https://cdn.jsdelivr.net/npm/apexcharts"]
+    script[src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"]
+    script[src="//variancecharts.com/cdn/variance-noncommercial-standalone-f47ffcf.min.js" charset="UTF-8"]
+    script[type="text/javascript" src="https://www.gstatic.com/charts/loader.js"]
+    script[type="text/javascript"]
+      |  google.charts.load('current', { packages: ['corechart', 'bar'] }); google.charts.setOnLoadCallback(drawAxisTickColors); function drawAxisTickColors() { var data = google.visualization.arrayToDataTable([ ['City', '2010 Population', '2000 Population'], ['New York City, NY', 8175000, 8008000], ['Los Angeles, CA', 3792000, 3694000], ['Chicago, IL', 2695000, 2896000], ['Houston, TX', 2099000, 1953000], ['Philadelphia, PA', 1526000, 1517000] ]); var options = { title: 'Population of Largest U.S. Cities', chartArea: { width: '50%' }, hAxis: { title: 'Total Population', minValue: 0, textStyle: { bold: true, fontSize: 12, color: '#4d4d4d' }, titleTextStyle: { bold: true, fontSize: 18, color: '#4d4d4d' } }, vAxis: { title: 'City', textStyle: { fontSize: 14, bold: true, color: '#848484' }, titleTextStyle: { fontSize: 14, bold: true, color: '#848484' } } }; var chart = new google.visualization.BarChart(document.getElementById('chart_div')); chart.draw(data, options); }
+      script[type="text/javascript" src="https://www.gstatic.com/charts/loader.js"]
+      script
+        |  google.charts.load('current', { 'packages': ['line', 'corechart'] }); google.charts.setOnLoadCallback(drawChart); function drawChart() { var button = document.getElementById('change-chart'); var chartDiv = document.getElementById('chart_div1'); var data = new google.visualization.DataTable(); data.addColumn('date', 'Month'); data.addColumn('number', "Average Temperature"); data.addColumn('number', "Average Hours of Daylight"); data.addRows([ [new Date(2014, 0), -.5, 5.7], [new Date(2014, 1), .4, 8.7], [new Date(2014, 2), .5, 12], [new Date(2014, 3), 2.9, 15.3], [new Date(2014, 4), 6.3, 18.6], [new Date(2014, 5), 9, 20.9], [new Date(2014, 6), 10.6, 19.8], [new Date(2014, 7), 10.3, 16.6], [new Date(2014, 8), 7.4, 13.3], [new Date(2014, 9), 4.4, 9.9], [new Date(2014, 10), 1.1, 6.6], [new Date(2014, 11), -.2, 4.5] ]); var materialOptions = { chart: { title: 'Average Temperatures and Daylight in Iceland Throughout the Year' }, width: 900, height: 500, series: { // Gives each series an axis name that matches the Y-axis below. 0: { axis: 'Temps' }, 1: { axis: 'Daylight' } }, axes: { // Adds labels to each axis; they don't have to match the axis names. y: { Temps: { label: 'Temps (Celsius)' }, Daylight: { label: 'Daylight' } } } }; var classicOptions = { title: 'Average Temperatures and Daylight in Iceland Throughout the Year', width: 900, height: 500, // Gives each series an axis that matches the vAxes number below. series: { 0: { targetAxisIndex: 0 }, 1: { targetAxisIndex: 1 } }, vAxes: { // Adds titles to each axis. 0: { title: 'Temps (Celsius)' }, 1: { title: 'Daylight' } }, hAxis: { ticks: [new Date(2014, 0), new Date(2014, 1), new Date(2014, 2), new Date(2014, 3), new Date(2014, 4), new Date(2014, 5), new Date(2014, 6), new Date(2014, 7), new Date(2014, 8), new Date(2014, 9), new Date(2014, 10), new Date(2014, 11) ] }, vAxis: { viewWindow: { max: 30 } } }; function drawMaterialChart() { var materialChart = new google.charts.Line(chartDiv); materialChart.draw(data, materialOptions); button.innerText = 'Change to Classic'; button.onclick = drawClassicChart; } function drawClassicChart() { var classicChart = new google.visualization.LineChart(chartDiv); classicChart.draw(data, classicOptions); button.innerText = 'Change to Material'; button.onclick = drawMaterialChart; } drawMaterialChart(); }
+      script[type="text/javascript"]
+        |  google.charts.load('current', { 'packages': ['corechart'] }); google.charts.setOnLoadCallback(drawChart); function drawChart() { var data = google.visualization.arrayToDataTable([ ['Task', 'Hours per Day'], ['Work', 11], ['Eat', 2], ['Commute', 2], ['Watch TV', 2], ['Sleep', 7] ]); var options = { title: 'My Daily Activities' }; var chart = new google.visualization.PieChart(document.getElementById('piechart')); chart.draw(data, options); } google.charts.load('current', { packages: ['corechart', 'bar'] }); google.charts.setOnLoadCallback(drawBasic); function drawBasic() { var data = google.visualization.arrayToDataTable([ ['City', '2010 Population',], ['New York City, NY', 8175000], ['Los Angeles, CA', 3792000], ['Chicago, IL', 2695000], ['Houston, TX', 2099000], ['Philadelphia, PA', 1526000] ]); var options = { title: 'Population of Largest U.S. Cities', chartArea: { width: '50%' }, hAxis: { title: 'Total Population', minValue: 0 }, vAxis: { title: 'City' } }; var chart = new google.visualization.BarChart(document.getElementById('chart_div_pro')); chart.draw(data, options); } google.charts.load("current", { packages: ["corechart"] }); google.charts.setOnLoadCallback(drawChart); function drawChart() { var data = google.visualization.arrayToDataTable([ ['Task', 'Hours per Day'], ['Work', 11], ['Eat', 2], ['Commute', 2], ['Watch TV', 2], ['Sleep', 7] ]); var options = { title: 'My Daily Activities', is3D: true, }; var chart = new google.visualization.PieChart(document.getElementById('piechart_3d')); chart.draw(data, options); }
+      script
+        |  google.charts.load('current', { 'packages': ['corechart'] }); google.charts.setOnLoadCallback(drawChart); function drawChart() { var data = google.visualization.arrayToDataTable([ ['Age', 'Weight'], [8, 12], [4, 5.5], [11, 14], [4, 5], [3, 3.5], [6.5, 7] ]); var options = { title: 'Age vs. Weight comparison', hAxis: { title: 'Age', minValue: 0, maxValue: 15 }, vAxis: { title: 'Weight', minValue: 0, maxValue: 15 }, legend: 'none' }; var chart = new google.visualization.ScatterChart(document.getElementById('chart_scatter_chart')); chart.draw(data, options); }
+      script
+        |  google.charts.load('current', { packages: ['corechart', 'bar'] }); google.charts.setOnLoadCallback(drawStacked); function drawStacked() { var data = new google.visualization.DataTable(); data.addColumn('timeofday', 'Time of Day'); data.addColumn('number', 'Motivation Level'); data.addColumn('number', 'Energy Level'); data.addRows([ [{ v: [8, 0, 0], f: '8 am' }, 1, .25], [{ v: [9, 0, 0], f: '9 am' }, 2, .5], [{ v: [10, 0, 0], f: '10 am' }, 3, 1], [{ v: [11, 0, 0], f: '11 am' }, 4, 2.25], [{ v: [12, 0, 0], f: '12 pm' }, 5, 2.25], [{ v: [13, 0, 0], f: '1 pm' }, 6, 3], [{ v: [14, 0, 0], f: '2 pm' }, 7, 4], [{ v: [15, 0, 0], f: '3 pm' }, 8, 5.25], [{ v: [16, 0, 0], f: '4 pm' }, 9, 7.5], [{ v: [17, 0, 0], f: '5 pm' }, 10, 10], ]); var options = { title: 'Motivation and Energy Level Throughout the Day', isStacked: true, hAxis: { title: 'Time of Day', format: 'h:mm a', viewWindow: { min: [7, 30, 0], max: [17, 30, 0] } }, vAxis: { title: 'Rating (scale of 1-10)' } }; var chart = new google.visualization.ColumnChart(document.getElementById('chart_multiple_col')); chart.draw(data, options); }
+    - if notice
+      p.alert.alert-success
+        = notice
+    - if alert
+      p.alert.alert-danger
+        = alert
+    style[type="text/css"]
+      |  .alert-success{ color: green; } .alert-danger{ color: red; }
+  body
+    -if current_user.nil?
+      .site-wrapper-onboarding
+        .topbar-wrapper
+          .account-wrapper
+            a[href="javascript:void(0)"]
+            .account-logo-wrapper
+              = image_tag "icons/logo.svg"
+            .account-name-wrapper
+              |  BitCot
+          - if notice
+            p.alert.alert-success
+              = notice
+          - if alert
+            p.alert.alert-danger
+              = alert
+        .page-wrapper
+          = yield
+    -else
+      .newadmin_dasboard
+        .topbar-wrapper
+          .sidebar_wrap
+            a.toggle-sidebar[href="javascript:void(0);"]
+              .hamburger
+                span.line
+                span.line
+                span.line
+          .account-wrapper
+            a[href="javascript:void(0)"]
+            .account-logo-wrapper
+              = image_tag "icons/logo.svg"
+            .account-name-wrapper
+              |  BitCot
+          - if notice
+            p.alert.alert-success
+              = notice
+          - if alert
+            p.alert.alert-danger
+              = alert
+          |&nbsp&nbsp&nbsp
+          - if current_user != true_user
+            | You (#{true_user.email}) are signed in as #{current_user.email}
+            |&nbsp&nbsp&nbsp
+            = button_to "Back to admin", stop_impersonating_admin_users_path, method: :post, class: "btn btn-primary mb-1"
+          .user-wrapper
+            ul.head_right_cont
+              li.helpnotify_list
+                a.helpicon[href="javascript:void(0)"]
+                  svg[xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewbox="0 0 30 30"]
+                    g#Group_43804[data-name="Group 43804" transform="translate(14456 19627)"]
+                      rect#Rectangle_14270[data-name="Rectangle 14270" width="30" height="30" transform="translate(-14456 -19627)" fill="none"]
+                      g#question_5_[data-name="question (5)" transform="translate(-14455 -19626)"]
+                        g#Group_43803[data-name="Group 43803"]
+                          path#Path_71681[data-name="Path 71681" d="M14.187,0A14.187,14.187,0,1,0,28.373,14.187,14.179,14.179,0,0,0,14.187,0Zm-.42,20.826a1.438,1.438,0,0,1,0-2.876,1.438,1.438,0,0,1,0,2.876ZM15.9,13.562A2.345,2.345,0,0,0,14.85,15.9c0,.355-.187.766-1.1.766-.766,0-1.027-.28-1.027-1.251a3.418,3.418,0,0,1,1.251-2.838c.616-.523,1.662-1.1,1.662-2.11,0-.859-.747-1.27-1.681-1.27-1.9,0-1.494,1.438-2.5,1.438a1.071,1.071,0,0,1-1.12-1.064c0-1.008,1.158-2.5,3.679-2.5,2.39,0,3.977,1.326,3.977,3.081S16.4,13.17,15.9,13.562Z" fill="#858585"]
+                a.notify_icon[href="javascript:void(0)"]
+                  svg[xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewbox="0 0 30 30"]
+                    g#Group_43805[data-name="Group 43805" transform="translate(14475 19670)"]
+                      rect#Rectangle_14270[data-name="Rectangle 14270" width="30" height="30" transform="translate(-14475 -19670)" fill="none"]
+                      g#notification_4_[data-name="notification (4)" transform="translate(-14473.998 -19670)"]
+                        path#Path_71678[data-name="Path 71678" d="M139.557,451.75A4.7,4.7,0,0,0,144.15,448h-9.185A4.7,4.7,0,0,0,139.557,451.75Zm0,0" transform="translate(-127.058 -421.751)" fill="#858585"]
+                        path#Path_71679[data-name="Path 71679" d="M21.263,55.166h-.015a8.76,8.76,0,0,1-8.75-8.75,8.672,8.672,0,0,1,.836-3.708c-.275-.026-.554-.042-.836-.042a8.75,8.75,0,0,0-8.75,8.75V54.9A8.381,8.381,0,0,1,.764,61.318a2.187,2.187,0,0,0-.688,2.245,2.293,2.293,0,0,0,2.248,1.6H22.667a2.291,2.291,0,0,0,2.285-1.734,2.191,2.191,0,0,0-.746-2.14A8.317,8.317,0,0,1,21.263,55.166Zm0,0" transform="translate(0 -40.168)" fill="#858585"]
+                        path#Path_71680[data-name="Path 71680" d="M268.511,6.25A6.25,6.25,0,1,1,262.261,0,6.25,6.25,0,0,1,268.511,6.25Zm0,0" transform="translate(-241.013)" fill="#858585"]
+              li.list-items.user_peofile
+                .media.align-items-center
+                  .avtar_blc
+                    = image_tag "thumbnails/user_img.jpg"
+                  .media-body.dropdown
+                    .admin_protext
+                      a#dropdownMenu2.dropdown-toggle.user_name[href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false"]
+                        |  #{current_user&.first_name} #{current_user&.last_name}
+                      .dropdown-menu.dropdown-menu-right.animate.slideIn.account_info[aria-labelledby="dropdownMenu2"]
+                        a.dropdown-item[href=profile_path]
+                          i.flaticon-account
+                          |  Profile
+                        .dropdown-divider
+                        .drop_ft.text-center.d-inline-block.w-100
+                          a.bg_primary.iq_sign_btn[href=destroy_user_session_path]
+                            i.flaticon-logout
+                            | Logout
+        .page-wrapper
+          aside.sidebar-wrapper.custom-scrollbar.wow.fadeInLeft.open
+            .sidebar-content-wrapper
+              ul.sidebar-list[style="padding-top: 60px" ]
+                li.sidebar-list-item.active
+                  a.sidebar-link[href="javascript:void(0);"]
+                    span.item-icon.flaticon-dashboard
+                    span.item-text
+                      | Dashboard
+                li.sidebar-list-item
+                  a.sidebar-link[href=admin_users_path]
+                    span.item-icon.flaticon-mobile-app
+                    span.item-text
+                      | Users
+                  - if current_user&.has_role?(:admin)
+                    a.sidebar-link[href=admin_posts_path]
+                      span.item-icon.flaticon-customize
+                      span.item-text
+                        | Admin Posts
+
+                  - else current_user&.has_role?(:user)
+                    a.sidebar-link[href=posts_path]
+                      span.item-icon.flaticon-customize
+                      span.item-text
+                        | User Posts
+                li.sidebar-list-item
+                  a.sidebar-link[href=messages_path]
+                    span.item-icon.flaticon-creative-plan
+                    span.item-text
+                      | Messages
+                li.sidebar-list-item
+                  a.sidebar-link[href=destroy_user_session_path]
+                    span.item-icon.flaticon-logout
+                    span.item-text
+                      | Logout
+          = yield
+
+  .footer.site-footer
+    .copy-right
+      | Copyright @Bitcot Privacy Policy
+javascript:
+   document.querySelector(".toggle-sidebar").addEventListener("click", function (e) {
+       document.querySelector(".sidebar-wrapper").classList.toggle("open");
+   });
+
+   document.querySelector(".toggle-sidebar").addEventListener("click", function (e) {
+       var sidebarWrapper = document.querySelector(".sidebar-wrapper");
+       var hasSubnavs = document.querySelectorAll(".has-subnav");
+       if (!sidebarWrapper.classList.contains("open")) {
+           for (var i = 0; i < hasSubnavs.length; i++) {
+               hasSubnavs[i].classList.remove("open");
+           }
+       } else {
+           // You can add code here if needed for the else case
+       }
+   });

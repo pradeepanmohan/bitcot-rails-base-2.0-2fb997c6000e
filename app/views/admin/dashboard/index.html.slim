@@ -1,0 +1,187 @@
+.content-area-wrapper
+  .content-wrapper
+    .container-fluid
+      .row
+        .col-lg-12
+          .head_toggle_select
+            span
+
+            h1.head_title
+            | Hi, Tom Pena
+            p
+            | Welcome back to BitCot CRM Dashboard
+            span.datesaerch_wrap
+              = form_tag admin_dashboard_path, method: :get do
+                span.datesearch_input
+                  label[for="dateInput"]
+                    | Select a date:
+                  input#dateInput[type="date" name="selected_date" value=params[:selected_date]]
+                  input[type="submit" value="Apply", class="btn btn-primary"]
+                ul.month-week-list
+                  li
+                    = link_to "Week", admin_dashboard_path(selected_date: params[:selected_date], date_type: "week")
+                  |
+                  li
+                    = link_to "Month", admin_dashboard_path(selected_date: params[:selected_date], date_type: "month")
+                  |
+                  li
+                    span#customText Custom
+                    div#customButtonWrapper
+                      input#customButton[type="checkbox" style="display: none;"]
+                      div.custom-date-fields(style="display: none;")
+                        label[for="startDate"]
+                          | Start Date:
+                        input#startDate[type="date" name="start_date" value=params[:start_date]]
+                        br
+                        br
+                        label[for="endDate"]
+                          | End Date:
+                        input#endDate[type="date" name="end_date" value=params[:end_date]]
+                        br
+                        br
+                          = submit_tag "Apply", class: "btn btn-primary"
+                  li
+                    = link_to "Reset", admin_dashboard_path, class: "btn btn-primary"
+
+    section.dashboard_boardadmin
+      .dashboard_boardinner
+        .container-fluid
+          .row
+            - count_labels = ["Compliant", "Non Compliant", "No Coverage", "In Default", "Expiring Insurance", "Pending Review"]
+            - @data.each_with_index do |count, index|
+              .col-xl-3.col-lg-6.col-md-6
+                .dashboard_counts
+                  span.countno_wrapper
+                  .count_no
+                    p
+                      = count
+                    p.suntext
+                      = count_labels[index]
+                  .count_noicon
+                    svg[xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewbox="0 0 30 30"]
+                      g#Group_43801[data-name="Group 43801" transform="translate(14376 19801)"]
+                        rect#Rectangle_14268[data-name="Rectangle 14268" width="30" height="30" transform="translate(-14376 -19801)" fill="none"]
+                        g#wallet_2_[data-name="wallet (2)" transform="translate(-14372 -19839.309)"]
+                          g#Group_43796[data-name="Group 43796" transform="translate(0 44.308)"]
+                            g#Group_43795[data-name="Group 43795" transform="translate(0 0)"]
+                              path#Path_71676[data-name="Path 71676" d="M15.648,50.073h5.765V47.4a3.092,3.092,0,0,0-3.088-3.088H3.088A3.092,3.092,0,0,0,0,47.4v11.53a3.092,3.092,0,0,0,3.088,3.088H18.324a3.092,3.092,0,0,0,3.088-3.088V56.25H15.648a3.088,3.088,0,0,1,0-6.177Z" transform="translate(0 -44.308)"]
+                          g#Group_43798[data-name="Group 43798" transform="translate(13.795 51.308)"]
+                            g#Group_43797[data-name="Group 43797"]
+                              path#Path_71677[data-name="Path 71677" d="M331.7,211.692a1.853,1.853,0,1,0,0,3.706h5.765v-3.706H331.7Zm.824,2.471H331.7a.618.618,0,0,1,0-1.235h.824a.618.618,0,0,1,0,1.235Z" transform="translate(-329.846 -211.692)"]
+                  .count_progressbar
+                    .progress_line
+                      span[style="width: #{@progress_percentages[index]}%"]
+                    .progress_percent
+                      p
+                        = "#{@progress_percentages[index]}%"
+
+          .row
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+
+                  h2
+                    | Compliance Rate
+                    = pie_chart @party_compliance_rate
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+
+                  h2
+                    | Total Compliance
+                    = area_chart @total_compliance_data.group_by_month(:created_at).maximum(:updated_at), width: "500px", height: "400px", adapter: "highcharts"
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  h2
+                    | Compliance vs NonCompliance
+                    = bar_chart @compliance_vs_non_compliance_grouped, stacked: true, library: { title: 'Compliance vs Non-Compliance Agreements' }, width: "500px", height: "400px", adapter: "highcharts"
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+
+                  h2
+                    | Compliance Info
+                    = line_chart [{ name: 'Parties', data: @compliance_progression[:parties][0][:data] }, { name: 'Agreements', data: @compliance_progression[:agreements][0][:data] }], library: { title: 'Monthly Compliance Progression' }, xtitle: 'Month', ytitle: 'Compliance Rate', width: "500px", height: "400px", adapter: "highcharts"
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+
+                  h2
+                    | Organization
+                    = area_chart @organization_creation_data, library: { title: 'Organization Creation Over Weeks' }, xtitle: 'Month', ytitle: 'Number of Organizations',width: "400px", height: "300px", adapter: "highcharts"
+
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+
+                  h2
+                    | Statics
+                    = bar_chart [{ name: 'Users', data: @statics_data_user.group_by_month(:created_at).count }, { name: 'Parties', data: @statics_data_party.group_by_month(:created_at).count }], stacked: false, library: { title: 'User and Party Creation Over Months' }, xtitle: 'Count', ytitle: 'Month', width: "500px", height: "400px", adapter: "highcharts"
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+
+                  h2
+                    | Top deficiencies
+                    = column_chart @top_deficiency_data.group_by_week(:created_at).sum(:total_deficient_requirements_count), width: "500px", height: "400px", adapter: "highcharts"
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+                  h2
+                    | Parties Progress
+                    = bar_chart @party_progress_chart_data, stacked: true, library: { title: 'Dashboard Data Attributes Over Months' }, xtitle: 'Week', ytitle: 'Percentage (%)', width: "500px", height: "400px", adapter: "highcharts"
+
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+
+                  h2
+                    | Expring Insurance
+                    = scatter_chart @expiring_insurance_data.pluck(:created_at, :expired_insurance_count), library: { title: 'Expiring Insurance Count Scatter Chart' }, xtitle: 'Date', ytitle: 'Expiring Insurance Count', width: "500px", height: "500px"
+            .col-xl-4.col-lg-6.col-md-6
+              .graphchart_wrapper
+                .graphchart_head
+                  span
+                  h2
+                    .graphline_chart
+                      | Compliance Rate : multiple axis chart
+                      = line_chart [{ name: 'Party Compliance Rate',
+                        data: [['Month 1', @compliance_data&.party_month_1_compliance_rate],
+                        ['Month 2', @compliance_data&.party_month_2_compliance_rate],
+                        ['Month 3', @compliance_data&.party_month_3_compliance_rate],
+                        ['Month 4', @compliance_data&.party_month_4_compliance_rate],
+                        ['Month 5', @compliance_data&.party_month_5_compliance_rate],
+                        ['Month 6', @compliance_data&.party_month_6_compliance_rate]] },
+                      { name: 'Coverage Compliance Rate', data: [['Month 1', @compliance_data&.coverage_month_1_compliance_rate],
+                        ['Month 2', @compliance_data&.coverage_month_2_compliance_rate],
+                        ['Month 3', @compliance_data&.coverage_month_3_compliance_rate],
+                        ['Month 4', @compliance_data&.coverage_month_4_compliance_rate],
+                        ['Month 5', @compliance_data&.coverage_month_5_compliance_rate],
+                        ['Month 6', @compliance_data&.coverage_month_6_compliance_rate]] },
+                      { name: 'Agreement Compliance Rate', data: [['Month 1', @compliance_data&.month_1_compliance_rate],
+                        ['Month 2', @compliance_data&.month_2_compliance_rate],
+                        ['Month 3', @compliance_data&.month_3_compliance_rate],
+                        ['Month 4', @compliance_data&.month_4_compliance_rate],
+                        ['Month 5', @compliance_data&.month_5_compliance_rate],
+                        ['Month 6', @compliance_data&.month_6_compliance_rate]] }], library: { title: 'Compliance Rate Comparison' }, width: "500px", height: "500px", adapter: "highcharts"
+
+javascript:
+
+    document.addEventListener("turbo:load", function () {
+        const customText = document.querySelector("#customText");
+        const customDateFields = document.querySelector(".custom-date-fields");
+
+        customText.addEventListener("click", function () {
+            customDateFields.style.display = "block";
+        });
+    });
+

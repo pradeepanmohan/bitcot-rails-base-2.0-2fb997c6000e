@@ -1,0 +1,46 @@
+.content-area-wrapper[style="margin-left: 0px" ]
+  .content-wrapper
+    .auth-warpper
+      .auth-title.text-center.custom-login
+        | Register
+
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .site-form-group.mb-3
+          .site-label
+            = f.label :first_name
+            = f.text_field :first_name, autofocus: true, autocomplete: "email", class: "input-modify"
+          .text-danger
+
+        .site-form-group.mb-3
+          .site-label
+            = f.label :last_name
+            = f.text_field :last_name, autofocus: true, autocomplete: "email", class: "input-modify"
+          .text-danger
+
+        .site-form-group.mb-3
+          .site-label
+            = f.label :email
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "input-modify"
+          .text-danger
+        .site-form-group.mb-3
+          .site-label
+            = f.label :password
+          .show-hide-relative
+            = f.password_field :password, autocomplete: "current-password", class: "input-modify", placeholder: "Minimum 6 charcters", id: "password-field"
+            #toggle-password.show-hide-wrapper
+              = image_tag("icons/icn-eye.svg", alt: "Show Password", id: "show-password")
+          .text-danger
+        .site-form-group.mb-3
+          .site-label
+            = f.label :password_confirmation
+          .show-hide-relative
+            = f.password_field :password_confirmation, autocomplete: "current-password", class: "input-modify", placeholder: "Re-enter your password", id: "password-confirm-field"
+            #toggle-confirm-password.show-hide-wrapper
+              = image_tag("icons/icn-eye.svg", alt: "Show Password", id: "show-password")
+        .site-form-group.text-center
+          = f.submit "Register", class: "btn btn-primary"
+        .site-form-group.text-center.dropdown-wrapper
+          .dropdown-button.btn.btn-primary More Options
+          .dropdown-content
+            = render "devise/shared/links"

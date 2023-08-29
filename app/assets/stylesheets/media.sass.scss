@@ -1,0 +1,24 @@
+@media (min-width: 1200px){
+    .w-xl-250px {
+        width: 250px!important;
+    }
+}
+@media (min-width: 992px){
+    .flex-lg-fill {
+        -webkit-box-flex: 1!important;
+        -ms-flex: 1 1 auto!important;
+        flex: 1 1 auto!important;
+    }
+}
+@media (max-width: 767px){
+    .auth-warpper .onboarding-form  .btn {
+        min-width: auto;
+        width: 100%;
+    }
+    .datesaerch_wrap {
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 12px;
+}
+}
+

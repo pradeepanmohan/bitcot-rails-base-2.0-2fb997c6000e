@@ -1,0 +1,21 @@
+.content-area-wrapper
+  .content-wrapper
+    .container-fluid
+      .row
+        .col-lg-12
+          .head_toggle_select
+            span
+
+            h1.head_title
+              | Post List
+        .container-fluid
+          .row.mb-3
+            .col-md-5
+              .icons-search-wrapper.mb-3
+                = render partial: "admin/search/form", locals: { results: [] } 
+            .col-md-7
+              .btn-wrapper.text-end
+                = link_to 'New Post', new_admin_post_path, class: "btn btn-primary mb-3"
+
+  = turbo_frame_tag "search-results" do
+    = render partial: "list", locals: { posts: @posts }

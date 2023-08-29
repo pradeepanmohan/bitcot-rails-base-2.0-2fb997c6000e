@@ -1,0 +1,44 @@
+development: &development
+  access_key: <%= Rails.application.credentials[Rails.env.to_sym][:SNS_ACCESS_KEY_ID] %>
+  secret_key: <%=Rails.application.credentials[Rails.env.to_sym][:SNS_SECRET_ACCESS_KEY] %>
+  apns_arn: 'arn:aws:sns:us-west-2:202255567303:app/APNS_SANDBOX/reverb_staging_dev'
+  apns_type: !ruby/symbol APNS_SANDBOX
+  gcm_arn: 'arn:aws:sns:us-west-2:957786725354:app/GCM/ANDROID_STAGING'
+  signature: 'HmacSHA1'
+  url: 'https://sns.us-west-2.amazonaws.com/'
+  ttl_seconds: 20
+
+test:
+  access_key: <%= Rails.application.credentials[Rails.env.to_sym][:SNS_ACCESS_KEY_ID] %>
+  secret_key: <%=Rails.application.credentials[Rails.env.to_sym][:SNS_SECRET_ACCESS_KEY] %>
+  apns_arn: 'arn:aws:sns:us-west-2:202255567303:app/APNS_SANDBOX/reverb_staging_dev'
+  apns_type: !ruby/symbol APNS_SANDBOX
+  gcm_arn: 'arn:aws:sns:us-west-2:957786725354:app/GCM/ANDROID_STAGING'
+  signature: 'HmacSHA1'
+  url: 'https://sns.us-west-2.amazonaws.com/'
+  ttl_seconds: 20
+
+staging:
+  access_key: <%= Rails.application.credentials[Rails.env.to_sym][:SNS_ACCESS_KEY_ID] %>
+  secret_key: <%= Rails.application.credentials[Rails.env.to_sym][:SNS_SECRET_ACCESS_KEY] %>
+#  apns_arn: 'arn:aws:sns:us-west-2:957786725354:app/APNS_SANDBOX/IOS_STAGING_DEV'
+#  apns_type: !ruby/symbol APNS_SANDBOX
+  apns_arn: 'arn:aws:sns:us-west-2:202255567303:app/APNS_SANDBOX/reverb_staging_dev'
+  apns_type: !ruby/symbol APNS
+  gcm_arn: 'arn:aws:sns:us-west-2:957786725354:app/GCM/ANDROID_STAGING'
+  signature: 'HmacSHA1'
+  url: 'https://sns.us-west-2.amazonaws.com/'
+  ttl_seconds: 40
+
+
+production:
+  access_key: <%= Rails.application.credentials[Rails.env.to_sym][:SNS_ACCESS_KEY_ID] %>
+  secret_key: <%=Rails.application.credentials[Rails.env.to_sym][:SNS_SECRET_ACCESS_KEY] %>
+#  apns_arn: 'arn:aws:sns:us-west-2:957786725354:app/APNS_SANDBOX/IOS_PRODUCTION_DEV'
+#  apns_type: !ruby/symbol APNS_SANDBOX
+  apns_arn: 'arn:aws:sns:us-west-2:202255567303:app/APNS/reverb_staging_prod'
+  apns_type: !ruby/symbol APNS
+  gcm_arn: 'arn:aws:sns:us-west-2:957786725354:app/GCM/ANDROID_PRODUCTION'
+  signature: 'HmacSHA1'
+  url: 'https://sns.us-west-2.amazonaws.com/'
+  ttl_seconds: 86400

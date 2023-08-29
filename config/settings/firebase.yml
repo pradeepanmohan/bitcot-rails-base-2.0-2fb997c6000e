@@ -1,0 +1,34 @@
+test:
+  app_code: basev2.page.link
+  app_store_id: P472M93WNF
+  ios_bundle_id: com.bitcot.basev2
+  android_package_name:
+  service_account: firebase-adminsdk-ega3f@railsbasev2.iam.gserviceaccount.com"
+
+development: &development
+  app_code: basev2.page.link
+  app_store_id: P472M93WNF
+  ios_bundle_id: com.bitcot.basev2
+  android_package_name:
+  service_account: firebase-adminsdk-ega3f@railsbasev2.iam.gserviceaccount.com
+
+staging:
+  app_code: basev2.page.link
+  app_store_id: P472M93WNF
+  ios_bundle_id: com.bitcot.basev2
+  android_package_name:
+  service_account: firebase-adminsdk-ega3f@railsbasev2.iam.gserviceaccount.com
+
+integration:
+  app_code: basev2.page.link
+  app_store_id: P472M93WNF
+  ios_bundle_id: com.bitcot.basev2
+  android_package_name:
+  service_account: firebase-adminsdk-ega3f@railsbasev2.iam.gserviceaccount.com
+
+production:
+  app_code: basev2.page.link
+  app_store_id: P472M93WNF
+  ios_bundle_id: com.bitcot.basev2
+  android_package_name:
+  service_account: firebase-adminsdk-ega3f@railsbasev2.iam.gserviceaccount.com

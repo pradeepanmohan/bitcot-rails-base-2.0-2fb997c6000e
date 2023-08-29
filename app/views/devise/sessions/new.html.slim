@@ -1,0 +1,41 @@
+.content-area-wrapper[style="margin-left: 0px" ]
+  .content-wrapper
+    .auth-warpper
+      .auth-title.text-center.custom-login
+        | Login
+
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .site-form-group.mb-3
+          .site-label
+            = f.label :email
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "input-modify"
+          .text-danger
+        .site-form-group.mb-3
+          .site-label
+            = f.label :password
+          .show-hide-relative
+            = f.password_field :password, autocomplete: "current-password", class: "input-modify", id: "password-field"
+            #toggle-password.show-hide-wrapper
+              = image_tag("icons/icn-eye.svg", alt: "Show Password", id: "show-password")
+          .text-danger
+
+        - if devise_mapping.rememberable?
+          .site-form-group
+            = f.check_box :remember_me
+            |&nbsp&nbsp
+            = f.label :remember_me
+        .site-form-group.mb-3
+          |&nbsp
+          = f.submit "Get Started Now!", class: "btn btn-primary", style: "width: 100%;"
+        br
+        .site-form-group.mb-3
+          |Don't Have An Account?
+          |&nbsp&nbsp
+          - if devise_mapping.registerable? && controller_name != 'registrations'
+            = link_to "Sign Up", new_registration_path(resource_name)
+        br
+          .site-form-group.mb-3.dropdown-wrapper.text-center
+            .dropdown-button.btn.btn-primary[style= "width: 50%" ] More Options
+            .dropdown-content[style= "width: 100%" ]
+              = render "devise/shared/links"

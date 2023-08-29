@@ -1,0 +1,36 @@
+.content-area-wrapper
+  .content-wrapper
+    .container-fluid
+      .row
+        .col-lg-12
+          .head_toggle_select
+            span
+            h1.head_title Your Posts
+      .container-fluid
+        .row.mb-3
+          .col-md-5
+            .icons-search-wrapper.mb-3
+              = form_tag admin_users_path, method: :get do
+                = text_field_tag :search, params[:search], placeholder: 'Search...'
+                | &nbsp;&nbsp;&nbsp;
+                = submit_tag 'Search', name: nil
+        .col-md-7
+          .btn-wrapper.text-end
+        .row
+          .col-xl-12
+            .table-responsive.site-table-wrapper
+              table.table
+                thead
+                  tr.w-full
+                    th.text-left ID
+                    th.text-left Title
+                    th.text-left Content
+                    th.text-center[colspan="2"] Actions
+                tbody
+                  - @posts.each do |post|
+                    tr
+                      td= post.id
+                      td= post.title
+                      td= post.content
+                      td= link_to image_tag('icon/icn-edit.jpg', class: 'small-icon icon-spacing'), edit_post_path(@post) if can? :update, @post, class: 'inline-action'
+                      td= link_to image_tag('icon/icn-trash.jpg', class: 'small-icon'), post, method: :delete, data: { confirm: "Are you sure?" } if can? :destroy, post,class: 'icon-button inline-action'

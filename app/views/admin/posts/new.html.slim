@@ -1,0 +1,12 @@
+- if @post.errors.any?
+  #error_explanation
+    h2 = "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+    ul
+      - @post.errors.full_messages.each do |message|
+        li = message
+div.prose.lg:prose-xl
+  h1 New Post
+
+div.grid.grid-cols-2.gap-4.mt-8
+  div.form-control.w-full.max-w-xs#contact-form
+    = render partial: "form", locals: { post: @post }

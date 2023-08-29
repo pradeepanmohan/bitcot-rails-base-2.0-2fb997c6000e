@@ -1,0 +1,9 @@
+div.prose.lg:prose-xl
+  h1 Edit Post
+
+div.grid.grid-cols-2.gap-4.mt-8
+  div.bg-gray-100.p-8
+    = render partial: "list", locals: { contacts: @posts }
+  div.form-control.w-full.max-w-xs
+    = render partial: "form", locals: { contact: @post }
+

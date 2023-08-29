@@ -1,0 +1,25 @@
+.content-area-wrapper
+  .content-wrapper
+    .container-fluid
+      .row
+        .col-lg-12
+          .head_toggle_select
+            span
+              h1
+                = @user.first_name
+                | &nbsp;
+                = @user.last_name
+              h5
+                | Email:
+                | &nbsp;
+                = @user.email
+
+              h5
+                | Active Status:
+                | &nbsp;
+                = @user.active_status
+
+              p
+                - if @user.image.attached?
+                  = image_tag @user.image, alt: "User's Image", width: '250px'
+              = link_to 'Back to Users', admin_users_path

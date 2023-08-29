@@ -1,0 +1,10 @@
+h1 Audit Changes for Post: #{@post.title}
+- @audits.each do |audit|
+  .audit-entry
+    p Changes made at: #{audit.created_at}
+    p Changes made by: #{audit.user.present? ? audit.user.email : 'Unknown'}
+    ul
+      - audit.audited_changes.each do |attribute, changes|
+        li
+          = "#{attribute}: #{changes[0]} -> #{changes[1]}"
+

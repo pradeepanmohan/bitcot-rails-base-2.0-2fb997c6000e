@@ -1,0 +1,23 @@
+.content-area-wrapper
+  .content-wrapper
+    .auth-warpper
+      .auth-title.text-center
+        = form_with(model: [:admin, post], local: true) do |f|
+          .onboarding-form
+            fieldset
+              .site-form-group.mb-3
+                - if post.errors.any?
+                  .form-errors
+                    .alert.shadow-lg.alert-error.text-white Your form's got some errors
+            .site-form-group.mb-3
+              = f.label :title, "Title"
+              = f.text_field :title, placeholder: "Add your title", class: 'input-modify'
+              = inline_error_for :title, post
+              br
+            .site-form-group.mb-3
+              = f.label :title, "Add Content"
+              = f.text_field :content, placeholder: "Add content", class: 'input-modify'
+              = inline_error_for :content, post
+              br
+            .site-form-group.text-center
+              = f.submit "Submit", class: 'btn btn-secondary btn-md btn-primary'

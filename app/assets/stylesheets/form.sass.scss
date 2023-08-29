@@ -1,0 +1,42 @@
+/** form **/
+.input-modify {
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #0B131F;
+  font-weight: 500;
+  padding: 10.5px 16px;
+  box-shadow: none;
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2196078431);
+  display: block;
+  width: 100%;
+  height: 50px;
+}
+.input-modify:focus {
+ box-shadow: none;
+ outline: 0;
+ border-color: #6d519f; 
+}
+.icons-search-wrapper {
+  position: relative;
+  max-width: 450px;
+}
+.icons-search-wrapper .input-modify {
+  padding-left: 45px;
+}
+.icons-search-wrapper .search-icon {
+  position: absolute;
+  top: 13px;
+  left: 15px;
+}
+.form-select {
+  border-color: rgba(0, 0, 0, 0.2196078431);
+}
+.form-select:focus {
+  outline: 0;
+  box-shadow: none;
+  cursor: pointer;
+  border-color: #6d519f; 
+}
+/** form **/

@@ -1,0 +1,7 @@
+tr[id="#{dom_id(post)}" data-stream-enter-class="animate-item-in" data-stream-exit-class="animate-item-out"]
+  td= post.id
+  td= link_to post.title, admin_post_path(post), data: { turbo_frame: "_top" }
+  td= post.content
+  td= link_to image_tag('icon/icn-edit.jpg', class: 'small-icon icon-spacing'), edit_admin_post_path(post), class: 'inline-action'
+  td= button_to image_tag('icon/icn-trash.jpg', class: 'small-icon'), admin_post_path(post), method: :delete, data: { confirm: 'Are you sure?' },class: 'icon-button inline-action'
+  td= link_to 'View Audit Changes',  audit_changes_admin_post_path(post)

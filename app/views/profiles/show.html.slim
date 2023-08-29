@@ -1,0 +1,27 @@
+.content-area-wrapper
+  .content-wrapper
+    .container-fluid
+      .row
+        .col-lg-12
+          .head_toggle_select
+            span
+
+              h2 Login Information
+              - if @user&.image.attached?
+                = image_tag @user.image, alt: "User's Image", width: '250px'
+              h6
+                strong First Name:
+                = @user.first_name
+              h6
+                strong Last Name:
+                = @user.last_name
+              h6
+                strong Email:
+                = @user.email
+
+              = link_to 'Edit Profile', edit_profile_path, class: 'btn btn-secondary btn-md btn-primary'
+              |&nbsp
+              = link_to 'Back', root_path, class: 'btn btn-secondary btn-md btn-primary'
+
+
+

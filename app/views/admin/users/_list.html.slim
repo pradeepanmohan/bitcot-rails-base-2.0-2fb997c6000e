@@ -1,0 +1,19 @@
+.container-fluid
+  .row
+    .col-xl-12
+      .table-responsive.site-table-wrapper
+        table.table
+          thead
+            tr.w-full
+              th[scope="col"] First Name
+              th[scope="col"] Last Name
+              th[scope="col"] Email
+              th[scope="col"] Active Status
+              th[scope="col", colspan="2"] Actions
+              th[scope="col"] Impersonate Login
+              th[scope="col",colspan="2"]
+                | Audits
+          tbody
+          #users-list[data-controller="users" data-action=""]
+            - @users.each do |user|
+              = render partial: "user", locals: { user: user }

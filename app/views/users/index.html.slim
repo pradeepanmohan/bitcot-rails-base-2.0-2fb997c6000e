@@ -1,0 +1,7 @@
+h1
+  | Hi
+div[data-controller="hello"]
+  h1[data-target="hello.output"]
+= javascript_include_tag "https://www.gstatic.com/charts/loader.js" 
+= pie_chart Party.group(:status).count
+= link_to 'Sign Out', destroy_user_session_path, method: :delete

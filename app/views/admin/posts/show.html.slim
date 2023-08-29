@@ -1,0 +1,18 @@
+.container-fluid
+  .row
+    .col-xl-12
+      .table-responsive.site-table-wrapper
+        table.table
+          thead
+            tr.w-full
+              th.text-left ID
+              th.text-left Title
+              th.text-left Content
+              th.text-center[colspan="2"] Actions
+          tbody
+          #posts-list[data-controller="posts" data-action=""]
+            - @post.each do |post|
+              = render partial: "post", locals: { post: post }
+  div.text-gray-400.mt-4.text-xs.text-right#posts-count
+    - if params[:action] != 'show'
+      = render partial: "admin/posts/count", locals: { posts: @post }

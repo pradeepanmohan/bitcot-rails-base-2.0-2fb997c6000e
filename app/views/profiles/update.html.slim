@@ -1,0 +1,21 @@
+h1 Profile Updated
+
+div
+  h2 Basic Information
+  p
+    strong First Name:
+    = @user.first_name
+  p
+    strong Last Name:
+    = @user.last_name
+  p
+    strong Email:
+    = @user.email
+  - if @user.image.attached?
+    = image_tag @user.image
+
+div
+  h2 Actions
+  = link_to 'View Profile', user_path(@user)
+  = link_to 'Edit Profile', edit_user_path(@user)
+  = link_to 'Change Password', edit_user_registration_path
